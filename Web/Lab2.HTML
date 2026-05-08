@@ -4,7 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Лабораторна робота 2: Основи CSS</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+
+      /* Фон сторінки */
+      background: linear-gradient(135deg, #1e3c72, #2a5298, #6dd5ed);
+      min-height: 100vh;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+    header {
+      text-align: center;
+      padding: 25px;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    main {
+      width: 80%;
+      margin: 20px auto;
+    }
+
+    section {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    h1, h2 {
+      color: #ffffff;
+    }
+
+    p, li, blockquote {
+      color: #f1f1f1;
+      line-height: 1.6;
+    }
+
+    blockquote {
+      border-left: 4px solid white;
+      padding-left: 15px;
+      font-style: italic;
+    }
+  </style>
+
 </head>
 <body>
   <header>
@@ -14,7 +62,11 @@
   <main>
     <section>
       <h2>Про мене</h2>
-      <p>Привіт! Мене звати Роман. Я студент спеціальності "Комп’ютерні науки", мешкаю у Добротворі та активно вивчаю веб-розробку для створення унікальних проектів.</p>
+      <p>
+        Привіт! Мене звати Роман. Я студент спеціальності 
+        "Комп’ютерні науки", мешкаю у Добротворі та активно 
+        вивчаю веб-розробку для створення унікальних проектів.
+      </p>
     </section>
     
     <section>
@@ -28,48 +80,16 @@
 
     <section class="custom-variant-section">
       <h2>Моє натхнення</h2>
-      <blockquote>"Програмування — це не про те, що ти знаєш, а про те, що ти можеш зрозуміти."</blockquote>
-      <p>Ця цитата чудово описує процес вирішення складних задач, чи то написання алгоритму сортування, чи дебагінг коду.</p>
+      <blockquote>
+        "Програмування — це не про те, що ти знаєш, 
+        а про те, що ти можеш зрозуміти."
+      </blockquote>
+
+      <p>
+        Ця цитата чудово описує процес вирішення складних задач, 
+        чи то написання алгоритму сортування, чи дебагінг коду.
+      </p>
     </section>
   </main>
 </body>
 </html>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: white;
-
-    background: linear-gradient(135deg, #1e3c72, #2a5298, #6dd5ed);
-
-    min-height: 100vh;
-
-    background-attachment: fixed;
-    background-size: cover;
-}
-header {
-    text-align: center;
-    padding: 30px;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(5px);
-}
-main {
-    width: 80%;
-    margin: 30px auto;
-}
-section {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-h1, h2 {
-    color: #ffffff;
-}
-blockquote {
-    font-style: italic;
-    border-left: 4px solid #ffffff;
-    padding-left: 15px;
-    color: #f0f0f0;
-}
