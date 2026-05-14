@@ -3,6 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Лаб 6 - Лотошинський Роман (КН)</title>
+    <style>
+        /* Доданий стиль для фону та форми */
+        body {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); /* Приємний градієнтний фон */
+            font-family: sans-serif;
+            height: 100vh; /* Висота на весь екран */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        form {
+            background: white; /* Білий фон для форми */
+            padding: 25px 40px;
+            border-radius: 10px; /* Закруглені кути */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Легка тінь */
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <h2>Форма реєстрації (Варіант 17)</h2>
@@ -24,11 +49,11 @@
         </select><br><br>
         <button type="submit">Зареєструватися</button>
     </form>
-
+ 
     <script>
         document.getElementById("myForm").onsubmit = function(event) {
             event.preventDefault(); // Зупиняємо відправку форми для перевірки
-
+ 
             let name = document.getElementById("name").value;
             let email = document.getElementById("email").value;
             let pass1 = document.getElementById("pass1").value;
@@ -37,14 +62,14 @@
             let group = document.getElementById("group").value;
             
             let errors = "";
-
+ 
             if (name === "") errors += "Введіть ім'я!\n";
             if (!email.includes("@")) errors += "Введіть коректний email!\n";
             if (pass1.length < 6) errors += "Пароль має бути від 6 символів!\n";
             if (pass1 !== pass2) errors += "Паролі не збігаються!\n";
             if (age < 10) errors += "Вік має бути 10 або більше!\n";
             if (group === "") errors += "Оберіть групу!\n";
-
+ 
             if (errors !== "") {
                 alert(errors); // Виводимо всі помилки
             } else {
