@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота 4: Вступ до JavaScript</title>
+</head>
+<body>
 
+  <h1>Лабораторна робота 4: Вступ до JavaScript</h1>
+
+  <script>
+
+    console.log("Завдання 1.");
+
+    let userName = prompt("Введіть ваше ім'я:");
+
+    let greeting = "Привіт, " + userName + "! Радий тебе бачити!";
+
+    alert(greeting);
+    console.log(greeting);
+
+
+    console.log("Завдання 2.");
+
+    let num1 = Number(prompt("Введіть перше число:"));
+    let num2 = Number(prompt("Введіть друге число:"));
+
+    let sum = num1 + num2;
+    let difference = num1 - num2;
+
+    alert("Сума: " + sum + "\nРізниця: " + difference);
+
+    console.log("Сума:", sum);
+    console.log("Різниця:", difference);
+
+
+    console.log("Завдання 3.");
+
+    let birthYear = Number(prompt("Введіть ваш рік народження:"));
+
+    const currentYear = 2025;
+    const myAge = 18; // Вкажіть свій вік
+
+    let userAge = currentYear - birthYear;
+
+    let ageDifference = Math.abs(userAge - myAge);
+
+    let message = "Ваш вік: " + userAge + " років.\n";
+
+    if (userAge > myAge) {
+      message += "Користувач старший на " + ageDifference + " років.";
+    } else if (userAge < myAge) {
+      message += "Користувач молодший на " + ageDifference + " років.";
+    } else {
+      message += "Ви одного віку.";
+    }
+
+    alert(message);
+    console.log(message);
+
+  </script>
+
+</body>
+</html>
