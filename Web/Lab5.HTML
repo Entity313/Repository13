@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота DOM</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: steelblue;
+            color: white;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+
+        #hoverText {
+            padding: 10px;
+            background-color: lightgray;
+            width: fit-content;
+            transition: 0.3s;
+        }
+
+        ul {
+            margin-top: 10px;
+        }
+
+        li {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Робота з DOM та подіями</h1>
+</header>
+
+<main>
+
+    <div class="container">
+        <h2>Зміна тексту</h2>
+
+        <p id="text">
+            Це початковий текст абзацу.
+        </p>
+
+        <button id="changeBtn">
+            Змінити текст
+        </button>
+    </div>
+
+    <div class="container">
+        <h2>Ефект наведення</h2>
+
+        <p id="hoverText">
+            Наведіть курсор на цей текст
+        </p>
+    </div>
+
+    <div class="container">
+        <h2>Додавання елементів</h2>
+
+        <button id="addBtn">
+            Додати елемент
+        </button>
+
+        <button id="removeBtn">
+            Видалити елемент
+        </button>
+
+        <ul id="list">
+            <li>Елемент 1</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>Додаткове завдання</h2>
+
+        <button id="variantBtn">
+            Натисніть 5 разів!
+        </button>
+    </div>
+
+</main>
+
+<footer>
+    <p>Лабораторна робота JavaScript DOM</p>
+</footer>
+
+<script>
+
+    const text = document.getElementById("text");
+    const changeBtn = document.getElementById("changeBtn");
+
+    changeBtn.addEventListener("click", function() {
+        text.textContent = "Текст було змінено за допомогою JavaScript!";
+    });
+
+
+    const hoverText = document.getElementById("hoverText");
+
+    hoverText.addEventListener("mouseover", function() {
+        hoverText.style.backgroundColor = "yellow";
+        hoverText.style.fontSize = "22px";
+    });
+
+    hoverText.addEventListener("mouseout", function() {
+        hoverText.style.backgroundColor = "lightgray";
+        hoverText.style.fontSize = "16px";
+    });
+
+
+    const addBtn = document.getElementById("addBtn");
+    const removeBtn = document.getElementById("removeBtn");
+    const list = document.getElementById("list");
+
+    let count = 2;
+
+    addBtn.addEventListener("click", function() {
+        const newItem = document.createElement("li");
+        newItem.textContent = "Елемент " + count;
+        list.appendChild(newItem);
+
+        count++;
+    });
+
+    removeBtn.addEventListener("click", function() {
+        if (list.lastElementChild) {
+            list.removeChild(list.lastElementChild);
+            count--;
+        }
+    });
+
+
+    const variantBtn = document.getElementById("variantBtn");
+
+    let clickCount = 0;
+    const variantNumber = 5;
+
+    variantBtn.addEventListener("click", function() {
+
+        clickCount++;
+
+        if (clickCount === variantNumber) {
+
+            alert("Ім’я Прізвище варіант номер 5!");
+
+            clickCount = 0;
+        }
+    });
+
+</script>
+
+</body>
+</html>
