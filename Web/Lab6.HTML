@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лаб 6 - Лотошинський Роман (КН)</title>
+</head>
+<body>
+    <h2>Форма реєстрації (Варіант 17)</h2>
+    
+    <form id="myForm">
+        Ім'я: <input type="text" id="name"><br><br>
+        Email: <input type="email" id="email"><br><br>
+        Пароль: <input type="password" id="pass1"><br><br>
+        Повторіть пароль: <input type="password" id="pass2"><br><br>
+        Вік: <input type="number" id="age"><br><br>
+        Група: 
+        <select id="group">
+            <option value="">--Оберіть--</option>
+            <option value="КН">КН</option>
+            <option value="IT-101">ІТ-101</option>
+            <option value="IT-102">ІТ-102</option>
+            <option value="IT-103">ІТ-103</option>
+            <option value="IT-104">ІТ-104</option>
+        </select><br><br>
+        <button type="submit">Зареєструватися</button>
+    </form>
+
+    <script>
+        document.getElementById("myForm").onsubmit = function(event) {
+            event.preventDefault(); // Зупиняємо відправку форми для перевірки
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let pass1 = document.getElementById("pass1").value;
+            let pass2 = document.getElementById("pass2").value;
+            let age = document.getElementById("age").value;
+            let group = document.getElementById("group").value;
+            
+            let errors = "";
+
+            if (name === "") errors += "Введіть ім'я!\n";
+            if (!email.includes("@")) errors += "Введіть коректний email!\n";
+            if (pass1.length < 6) errors += "Пароль має бути від 6 символів!\n";
+            if (pass1 !== pass2) errors += "Паролі не збігаються!\n";
+            if (age < 10) errors += "Вік має бути 10 або більше!\n";
+            if (group === "") errors += "Оберіть групу!\n";
+
+            if (errors !== "") {
+                alert(errors); // Виводимо всі помилки
+            } else {
+                alert("Реєстрація успішна!");
+            }
+        };
+    </script>
+</body>
+</html>
