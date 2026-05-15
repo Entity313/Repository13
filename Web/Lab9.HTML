@@ -1,121 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Лаб 8 - Лотошинський Роман (КН)</title>
+    <title>Лаб 9 - Варіант 17</title>
 
     <style>
         body {
             font-family: sans-serif;
-            padding: 10px;
+            padding: 15px;
 
             /* Фон сторінки */
             background: linear-gradient(to right, #74ebd5, #ACB6E5);
-        }
 
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 8px;
-            background: white;
-        }
-
-        form {
-            margin: 15px 0;
-            background: #eee;
-            padding: 10px;
-            display: inline-block;
-            border-radius: 8px;
+            /* Щоб контент був красивіший */
+            min-height: 100vh;
         }
 
         h2 {
-            color: darkblue;
+            color: white;
+        }
+
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        li {
+            margin-bottom: 8px;
+
+            /* Стиль для елементів списку */
+            background: rgba(255,255,255,0.8);
+            padding: 8px;
+            border-radius: 8px;
+            list-style: none;
         }
 
         button {
-            padding: 5px 10px;
             cursor: pointer;
+            margin-left: 5px;
+        }
+
+        input {
+            padding: 6px;
+            border-radius: 5px;
+            border: none;
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Список справ (В-17)</h2>
+    <h2>To-Do List (Варіант 17)</h2>
 
-    <button onclick="loadData()">Оновити дані</button>
+    <input id="taskInput" placeholder="Введіть завдання...">
+    <button onclick="addTask()">Додати</button>
+    <button onclick="sortTasks()">Сортувати за датою</button>
 
-    <form id="addForm">
-        Справа:
-        <input id="title" required>
-
-        Статус:
-        <select id="status">
-            <option>Виконано</option>
-            <option>Не виконано</option>
-        </select>
-
-        <button type="submit">Добавити</button>
-    </form>
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Назва</th>
-                <th>Статус</th>
-            </tr>
-        </thead>
-
-        <tbody id="tb"></tbody>
-    </table>
+    <ul id="taskList"></ul>
 
     <script>
-        let counter = 11;
+        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-        function addRow(id, title, status) {
-            let tr = document.createElement("tr");
+        function render() {
+            const list = document.getElementById("taskList");
+            list.innerHTML = "";
 
-            tr.innerHTML =
-                `<td>${id}</td>
-                 <td>${title}</td>
-                 <td>${status}</td>`;
+            tasks.forEach((t, index) => {
+                list.innerHTML += `
+                    <li>
+                        <input type="checkbox" onchange="toggle(${index})" ${t.done ? "checked" : ""}>
+                        <span class="${t.done ? 'done' : ''}">
+                            ${t.text}
+                            <small>(${new Date(t.date).toLocaleTimeString()})</small>
+                        </span>
 
-            document.getElementById("tb").appendChild(tr);
+                        <button onclick="del(${index})">❌</button>
+                    </li>
+                `;
+            });
+
+            localStorage.setItem("tasks", JSON.stringify(tasks));
         }
 
-        function loadData() {
-            document.getElementById("tb").innerHTML = "";
+        function addTask() {
+            const text = document.getElementById("taskInput").value;
 
-            fetch("https://jsonplaceholder.typicode.com/todos")
-                .then(res => res.json())
-                .then(data => {
+            if (text === "") return;
 
-                    data.slice(0, 10).forEach(item => {
+            tasks.push({
+                text: text,
+                done: false,
+                date: Date.now()
+            });
 
-                        addRow(
-                            item.id,
-                            item.title,
-                            item.completed ? "Виконано" : "Не виконано"
-                        );
+            document.getElementById("taskInput").value = "";
 
-                    });
-
-                });
+            render();
         }
 
-        document.getElementById("addForm").onsubmit = function(e) {
+        function toggle(index) {
+            tasks[index].done = !tasks[index].done;
+            render();
+        }
 
-            e.preventDefault();
+        function del(index) {
+            tasks.splice(index, 1);
+            render();
+        }
 
-            addRow(
-                counter++,
-                document.getElementById("title").value,
-                document.getElementById("status").value
-            );
-        };
+        function sortTasks() {
+            tasks.sort((a, b) => a.date - b.date);
+            render();
+        }
 
-        loadData();
+        render();
     </script>
 
 </body>
