@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лаб 7 - Лотошинський Роман (КН)</title>
+    <style>
+        
+        .color-btn {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            transition: background-color 0.5s; 
+        }
+        .color-btn:hover { background-color: red; }
+        .color-btn:active { transform: scale(0.9);  }
+
+       
+        .text-block {
+            background-color: #ddd;
+            width: 200px;
+            max-height: 20px;
+            overflow: hidden;
+            transition: max-height 1s; 
+        }
+        .text-block:hover { max-height: 100px; }
+
+        @keyframes moveBox {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(150px); }
+            100% { transform: translateX(0); }
+        }
+        .square {
+            width: 50px; height: 50px; background-color: green;
+            animation: moveBox 2s infinite; 
+        }
+
+        @keyframes moveCircle {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(200px); }
+            100% { transform: translateX(0); }
+        }
+        .circle {
+            width: 50px; height: 50px; background-color: purple; border-radius: 50%;
+            margin-top: 10px;
+            transition: background-color 0.5s;
+        }
+        .run-animation { animation: moveCircle 3.4s infinite; }
+    </style>
+</head>
+<body>
+
+    <h3>Завдання 1. Кнопка</h3>
+    <button class="color-btn">Наведи і натисни</button>
+
+    <h3>Завдання 2. Розгортання тексту</h3>
+    <div class="text-block">
+        <strong>Наведи сюди</strong><br>
+        Це прихований текст,<br>який з'являється плавно.
+    </div>
+
+    <h3>Завдання 3. Рух блоку</h3>
+    <div class="square"></div>
+
+    <h3>Індивідуальне завдання (В-17, Група КН)</h3>
+    <button id="startBtn">Старт/Стоп руху кола</button>
+    <div id="myCircle" class="circle"></div>
+
+    <script>
+        document.getElementById("startBtn").onclick = function() {
+            document.getElementById("myCircle").classList.toggle("run-animation");
+        };
+
+        setInterval(function() {
+            let randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            document.getElementById("myCircle").style.backgroundColor = randomColor;
+        }, 17000); 
+    </script>
+
+</body>
+</html>
