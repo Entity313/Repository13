@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лаб 9 - Варіант 17</title>
+    <style>
+        body { font-family: sans-serif; padding: 15px; }
+        .done { text-decoration: line-through; color: gray; }
+        li { margin-bottom: 8px; }
+        button { cursor: pointer; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>To-Do List (Варіант 17)</h2>
+    
+    <input id="taskInput" placeholder="Введіть завдання...">
+    <button onclick="addTask()">Додати</button>
+    <button onclick="sortTasks()">Сортувати за датою</button>
+    
+    <ul id="taskList"></ul>
+
+    <script>
+        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+        function render() {
+            const list = document.getElementById("taskList");
+            list.innerHTML = ""; // Очищаємо список перед оновленням
+            
+            tasks.forEach((t, index) => {
+                list.innerHTML += `
+                    <li>
+                        <input type="checkbox" onchange="toggle(${index})" ${t.done ? "checked" : ""}>
+                        <span class="${t.done ? 'done' : ''}">${t.text} <small>(${new Date(t.date).toLocaleTimeString()})</small></span>
+                        <button onclick="del(${index})">❌</button>
+                    </li>`;
+            });
+            
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        function addTask() {
+            const text = document.getElementById("taskInput").value;
+            if (text === "") return; // Захист від порожніх рядків
+            
+            tasks.push({ text: text, done: false, date: Date.now() });
+            document.getElementById("taskInput").value = "";
+            render();
+        }
+
+        function toggle(index) {
+            tasks[index].done = !tasks[index].done;
+            render();
+        }
+
+        function del(index) {
+            tasks.splice(index, 1);
+            render();
+        }
+
+        function sortTasks() {
+            tasks.sort((a, b) => a.date - b.date);
+            render();
+        }
+
+        render();
+    </script>
+
+</body>
+</html>
