@@ -3,55 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <title>Лаб 8 - Лотошинський Роман (КН)</title>
+
     <style>
-        body { font-family: sans-serif; padding: 10px; }
-        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 8px; }
-        form { margin: 15px 0; background: #eee; padding: 10px; display: inline-block; }
+        body {
+            font-family: sans-serif;
+            padding: 10px;
+
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+            background: white;
+        }
+
+        form {
+            margin: 15px 0;
+            background: #eee;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: darkblue;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
 
     <h2>Список справ (В-17)</h2>
+
     <button onclick="loadData()">Оновити дані</button>
 
     <form id="addForm">
-        Справа: <input id="title" required>
-        Статус: <select id="status"><option>Виконано</option><option>Не виконано</option></select>
+        Справа:
+        <input id="title" required>
+
+        Статус:
+        <select id="status">
+            <option>Виконано</option>
+            <option>Не виконано</option>
+        </select>
+
         <button type="submit">Добавити</button>
     </form>
 
     <table>
-        <thead><tr><th>ID</th><th>Назва</th><th>Статус</th></tr></thead>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Статус</th>
+            </tr>
+        </thead>
+
         <tbody id="tb"></tbody>
     </table>
 
     <script>
         let counter = 11;
 
-       
         function addRow(id, title, status) {
             let tr = document.createElement("tr");
-            tr.innerHTML = `<td>${id}</td><td>${title}</td><td>${status}</td>`;
+
+            tr.innerHTML =
+                `<td>${id}</td>
+                 <td>${title}</td>
+                 <td>${status}</td>`;
+
             document.getElementById("tb").appendChild(tr);
         }
 
         function loadData() {
             document.getElementById("tb").innerHTML = "";
+
             fetch("https://jsonplaceholder.typicode.com/todos")
                 .then(res => res.json())
                 .then(data => {
+
                     data.slice(0, 10).forEach(item => {
-                        addRow(item.id, item.title, item.completed ? "Виконано" : "Не виконано");
+
+                        addRow(
+                            item.id,
+                            item.title,
+                            item.completed ? "Виконано" : "Не виконано"
+                        );
+
                     });
+
                 });
         }
 
         document.getElementById("addForm").onsubmit = function(e) {
+
             e.preventDefault();
-            addRow(counter++, document.getElementById("title").value, document.getElementById("status").value);
+
+            addRow(
+                counter++,
+                document.getElementById("title").value,
+                document.getElementById("status").value
+            );
         };
 
-        loadData(); 
+        loadData();
     </script>
+
 </body>
 </html>
