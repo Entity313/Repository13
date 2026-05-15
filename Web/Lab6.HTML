@@ -51,7 +51,7 @@
  
     <script>
         document.getElementById("myForm").onsubmit = function(event) {
-            event.preventDefault(); // Зупиняємо відправку форми для перевірки
+            event.preventDefault(); 
  
             let name = document.getElementById("name").value;
             let email = document.getElementById("email").value;
@@ -70,7 +70,7 @@
             if (group === "") errors += "Оберіть групу!\n";
  
             if (errors !== "") {
-                alert(errors); // Виводимо всі помилки
+                alert(errors); 
             } else {
                 alert("Реєстрація успішна!");
             }
